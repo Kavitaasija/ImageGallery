@@ -14,8 +14,8 @@ class ImageViewCell: UICollectionViewCell,UIScrollViewDelegate
     
     
 
-    var isDownLoadingInprogress = false
-    var progressbar : MBCircularProgressBarView!
+    private var isDownLoadingInprogress = false
+    private var progressbar : MBCircularProgressBarView!
     var customView : CustomImageView!
 
     

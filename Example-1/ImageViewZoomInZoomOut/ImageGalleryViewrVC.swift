@@ -11,14 +11,16 @@ import UIKit
 class ImageGalleryViewrVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,NSURLSessionDelegate {
 
 
-    var crossbtn = UIButton()
-    var collectionView : UICollectionView!
     var thumNailIconUrlArray : NSMutableArray!
     var LargeImageArray : NSMutableArray!
-    var downloadedImageUrlArray = [String : AnyObject]()
     var imagecaptionTextArray : NSMutableArray!
     var scrollingIndex : Int?
-    var isImageStartDownloaded = NSMutableArray()
+
+    var crossbtn = UIButton()
+    var collectionView : UICollectionView!
+    
+    private var downloadedImageUrlArray = [String : AnyObject]()
+    private var isImageStartDownloaded = NSMutableArray()
     var session: NSURLSession!
     
     
