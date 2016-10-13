@@ -67,7 +67,32 @@ class ImageViewCell: UICollectionViewCell,UIScrollViewDelegate
         }
         else
         {
-            customView.imageview.image = UIImage(named: largeImage!)
+//            customView.imageview.image = UIImage(named: largeImage!)
+            
+            let cgImage = UIImage(contentsOfFile: largeImage!)!.CGImage
+            let width = CGImageGetWidth(cgImage) / 2
+            let height = CGImageGetHeight(cgImage) / 2
+            let bitsPerComponent = CGImageGetBitsPerComponent(cgImage)
+            let bytesPerRow = CGImageGetBytesPerRow(cgImage)
+            let colorSpace = CGImageGetColorSpace(cgImage)
+            let bitmapInfo = CGImageGetBitmapInfo(cgImage)
+            
+            if let context = CGBitmapContextCreate(nil, width, height, bitsPerComponent, bytesPerRow, colorSpace, bitmapInfo.rawValue)
+            {
+                
+                CGContextSetInterpolationQuality(context, .High)
+                
+                CGContextDrawImage(context, CGRect(origin: CGPointZero, size: CGSize(width: CGFloat(width), height: CGFloat(height))), cgImage)
+                
+                let scaledImage = CGBitmapContextCreateImage(context).flatMap { UIImage(CGImage: $0) }
+                customView.imageview.image = scaledImage
+                
+            }
+            else
+            {
+                customView.imageview.image = UIImage(contentsOfFile: largeImage!)
+            }
+
             if progressbar != nil
             {
                 dispatch_async(dispatch_get_main_queue(), {() in
